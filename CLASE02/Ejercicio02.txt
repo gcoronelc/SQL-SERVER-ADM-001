@@ -6,8 +6,11 @@ cualquier tabla, menos la tabla cargo.
 
 Solución
 -------------------------------------------
-
-
+1.- Crear el login: gustavo
+2.- Vincular el login con la BD: RH 
+3.- Asignarle el rol db_datareader al usuario: Gustavo
+4.- Negarle el privilegio de lectura sobre
+    la tabla cargo a gustavo.
 
 
 

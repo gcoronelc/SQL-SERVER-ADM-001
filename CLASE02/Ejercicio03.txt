@@ -1,0 +1,14 @@
+Requerimiento
+--------------------------------------
+El DBA ha determinado que el acceso
+a las tablas solo se debe hacer 
+pediante procedimiento almacenados.
+Se necesita con suma urgencia un
+procedimiento para la lectura de 
+la tabla de empleados y sus departamentos.
+
+Diseñar la solución para que cualquier
+usuario con acceso a la base de datos
+RH pueda ejecutar el procedimiento
+almacenado.
+
