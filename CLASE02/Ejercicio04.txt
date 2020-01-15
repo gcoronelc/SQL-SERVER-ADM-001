@@ -1,0 +1,11 @@
+Requerimiento
+--------------------------------------
+El DBA ha determinado que el acceso
+a las tablas solo se debe hacer 
+pediante procedimiento almacenados.
+
+Se necesita con suma urgencia un
+rol para gestionar estos requerimientos
+de una manera facil.
+
+
