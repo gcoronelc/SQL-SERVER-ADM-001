@@ -1,0 +1,14 @@
+Requerimiento
+------------------------------------
+Se necesita que el login id DENNIS
+puede leer el contenido de cualquier 
+tabla de la BD RH.
+
+Solución
+------------------------------------
+1.- Vincular el login dennis con 
+    la base de datos RH.
+2.- Asignar el rol db_datareader 
+    al usuario de base de datos dennis.
+	
+

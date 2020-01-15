@@ -1,0 +1,15 @@
+Requerimiento
+-------------------------------------------
+Se necesita tener un login que me permita
+accder al la BD RH, que pueda leer 
+cualquier tabla, menos la tabla cargo.
+
+Solución
+-------------------------------------------
+
+
+
+
+
+
+
