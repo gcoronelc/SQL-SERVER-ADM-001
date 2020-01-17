@@ -1,4 +1,11 @@
 
+create table dbo.algo(
+id integer identity,
+dato varchar(100)
+);
+go
+
+
 BEGIN TRANSACTION;
 GO
 
