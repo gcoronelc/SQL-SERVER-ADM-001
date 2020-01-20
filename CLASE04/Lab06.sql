@@ -75,3 +75,53 @@ restore headeronly from pd
 go
 
 
+-- 6.6
+
+declare @k int
+set @k = 0
+while (@k < 100)
+begin
+begin tran
+	insert into perudev..test(dato) values('2do. Backup Diferencial')
+	commit tran
+	set @k = @k + 1
+end
+go
+
+
+backup database perudev
+to pd
+with
+	differential,
+	name = 'BakDif02',
+	description = '2do backup diferencial de la base de datos'
+go
+
+restore headeronly from pd
+go
+
+
+-- 6.7
+
+declare @k int
+set @k = 0
+while (@k < 100)
+begin
+	begin tran
+	insert into perudev..test(dato) values('Que pasa con mis datos')
+	commit tran
+	set @k = @k + 1
+end
+go
+
+backup log perudev
+to pd
+with
+	no_truncate,
+	name = 'BakLog',
+	description = 'Backup del log.'
+go
+
+restore headeronly from pd
+go
+
