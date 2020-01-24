@@ -1,0 +1,31 @@
+2.2
+---------------------------------------------------
+bcp edutec.dbo.Curso out g:\bcp\Curso_A.dat -T -c
+
+
+2.3
+---------------------------------------------------
+bcp edutec.dbo.Curso out g:\bcp\Curso_B.dat -c -Ugustavo -Psecreto
+
+
+2.4
+---------------------------------------------------
+bcp edutec.dbo.Curso2 in g:\bcp\Curso_B.dat -T -c
+
+
+2.5
+---------------------------------------------------
+bcp "select NomCurso from EduTec.dbo.Curso" queryout g:\bcp\Curso.NomCurso.dat -T -c
+
+
+2.6
+---------------------------------------------------
+bcp "select * from EduTec.dbo.Profesor where IdProfesor='P002'" queryout g:\bcp\P002.dat -T -c
+
+2.7
+-----------------------------------------------------
+bcp "select ApeProfesor, NomProfesor from EduTec.dbo.Profesor order by 1, 2" queryout g:\bcp\Profesores.txt -T -c
+
+bcp "select * from EduTec.dbo.v_Resumen_2019 order by 1" queryout g:\bcp\Resumen_2019.txt -T -c
+
+
