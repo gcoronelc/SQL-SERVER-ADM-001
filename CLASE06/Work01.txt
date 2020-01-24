@@ -29,3 +29,32 @@ bcp "select ApeProfesor, NomProfesor from EduTec.dbo.Profesor order by 1, 2" que
 bcp "select * from EduTec.dbo.v_Resumen_2019 order by 1" queryout g:\bcp\Resumen_2019.txt -T -c
 
 
+2.8 Crea un archivo de formato NO XML
+-----------------------------------------------------
+bcp EduTec.dbo.Curso format nul -T -c -f g:\bcp\Curso.fmt
+
+
+2.9 Crea un archivo de formato XML
+-----------------------------------------------------
+bcp EduTec.dbo.Curso format nul -T -c -x -f g:\bcp\Curso.xml
+
+
+2.10  Importación Masiva
+-----------------------------------------------------
+bcp EduTec.dbo.Curso3 in G:\bcp\Curso_B.dat -T -f G:\bcp\Curso.xml
+
+
+2.11 Exportar a formato CSV
+-----------------------------------------------------
+bcp "SELECT * FROM dbo.Curso" queryout G:\BCP\Cursos.CSV -t, -c -S . -d EDUTEC -T
+
+
+3.4 Archivo nativo
+---------------------------------------------------------
+bcp EduTec.dbo.Curso out g:\bcp\Curso-nat.Dat -n -T
+
+
+
+
+
+
