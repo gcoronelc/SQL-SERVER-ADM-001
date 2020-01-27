@@ -17,6 +17,9 @@ NORTHWIND a la base de datos DEMO_VENTAS.
 Se debe programar una tarea para que se
 ejecute todos los días a las 6am.
 
+Enviar correo si la tarea se ejecuta bien 
+a egcc.uni@gmail.com
+
 
 
 
