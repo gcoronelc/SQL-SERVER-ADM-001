@@ -1,0 +1,892 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/27/2020 5:45:58 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="PC-402-01"
+  DTS:CreatorName="CEPS-01\Administrador"
+  DTS:DTSID="{4A17E7BC-BF62-4645-83FE-169A4577BFD9}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LocaleID="10250"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{A496420B-3B8E-417B-B833-6AD84C5C10BE}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.DEMO_VENTAS]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{F957A341-3222-44C7-BF9A-F825B54820EF}"
+      DTS:ObjectName="LocalHost.DEMO_VENTAS">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;Initial Catalog=DEMO_VENTAS;Integrated Security=True;Application Name=SSIS-Package-{F957A341-3222-44C7-BF9A-F825B54820EF}LocalHost.DEMO_VENTAS;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.Northwind]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{053218DF-7ABC-4D4C-97F1-4B23A17B6713}"
+      DTS:ObjectName="LocalHost.Northwind">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;Initial Catalog=Northwind;Integrated Security=True;Application Name=SSIS-Package-{053218DF-7ABC-4D4C-97F1-4B23A17B6713}LocalHost.Northwind;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Tarea Flujo de datos ventas 2"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{05D66CF9-CE20-4152-98DF-CC5C5AE2CE46}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tarea Flujo de datos ventas 2"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Tarea Flujo de datos ventas 2\División condicional"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="División condicional;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+              description="Enruta filas de datos a diferentes salidas según el contenido de los datos. Se usan condiciones (expresiones de SSIS) para especificar las filas que se van a enrutar. Por ejemplo, se usa para separar los registros que deben limpiarse de los registros listos para ser cargados o para enrutar solamente un subconjunto de registros."
+              name="División condicional"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Tarea Flujo de datos ventas 2\División condicional.Inputs[Entrada de división condicional]"
+                  description="Entrada en la transformación División condicional"
+                  name="Entrada de división condicional">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\División condicional.Inputs[Entrada de división condicional].Columns[OrderDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="OrderDate"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[OrderDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Tarea Flujo de datos ventas 2\División condicional.Outputs[DESPUES DE 1997]"
+                  description="Salida 1 de la transformación División condicional"
+                  errorOrTruncationOperation="Cálculo"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="DESPUES DE 1997"
+                  synchronousInputId="Package\Tarea Flujo de datos ventas 2\División condicional.Inputs[Entrada de división condicional]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la expresión. Esta versión de expresión usa identificadores de linaje en lugar de nombres de columna."
+                      name="Expression">#{Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[OrderDate]} &gt;= (DT_DBDATE)"01/01/1997"</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la versión descriptiva de la expresión. Esta versión de expresión usa nombres de columna."
+                      expressionType="Notify"
+                      name="FriendlyExpression">OrderDate &gt;= (DT_DBDATE)"01/01/1997"</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la posición de la condición en la lista de condiciones que evalúa la transformación. El orden de evaluación es del menor al mayor valor."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Tarea Flujo de datos ventas 2\División condicional.Outputs[ANTES DE 1997]"
+                  description="Salida 2 de la transformación División condicional"
+                  errorOrTruncationOperation="Cálculo"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="ANTES DE 1997"
+                  synchronousInputId="Package\Tarea Flujo de datos ventas 2\División condicional.Inputs[Entrada de división condicional]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la expresión. Esta versión de expresión usa identificadores de linaje en lugar de nombres de columna."
+                      name="Expression">#{Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[OrderDate]} &lt; (DT_DBDATE)"01/01/1997"</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la versión descriptiva de la expresión. Esta versión de expresión usa nombres de columna."
+                      expressionType="Notify"
+                      name="FriendlyExpression">OrderDate &lt; (DT_DBDATE)"01/01/1997"</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la posición de la condición en la lista de condiciones que evalúa la transformación. El orden de evaluación es del menor al mayor valor."
+                      name="EvaluationOrder">1</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Tarea Flujo de datos ventas 2\División condicional.Outputs[Salida predeterminada de división condicional]"
+                  description="Salida predeterminada de la transformación División condicional"
+                  exclusionGroup="1"
+                  name="Salida predeterminada de división condicional"
+                  synchronousInputId="Package\Tarea Flujo de datos ventas 2\División condicional.Inputs[Entrada de división condicional]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Tarea Flujo de datos ventas 2\División condicional.Outputs[Salida de error de división condicional]"
+                  description="Salida de error de la transformación División condicional"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de división condicional"
+                  synchronousInputId="Package\Tarea Flujo de datos ventas 2\División condicional.Inputs[Entrada de división condicional]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server."
+              name="Origen de NORTWIND"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica la instrucción SQL utilizada por el componente para extraer datos."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+	C.CustomerID, C.CompanyName, O.OrderID, O.OrderDate,
+	P.ProductName, D.UnitPrice, D.Quantity
+FROM Northwind.dbo.Customers AS C
+JOIN Northwind.dbo.Orders AS O ON C.CustomerID = O.CustomerID
+JOIN Northwind.dbo.[Order Details] AS D ON O.OrderID = D.OrderID
+JOIN Northwind.dbo.Products AS P ON D.ProductID = P.ProductID</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si se debe permitir que columnas externas que no sean de cadenas se conviertan implícitamente en cadenas en las columnas de salida."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de origen."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especificar el modo de recuperar información de columnas externas"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.Northwind]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.Northwind]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET]"
+                  name="Salida de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[CustomerID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].ExternalColumns[CustomerID]"
+                      length="5"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[CustomerID]"
+                      name="CustomerID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[CompanyName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].ExternalColumns[CompanyName]"
+                      length="40"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[CompanyName]"
+                      name="CompanyName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[OrderID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].ExternalColumns[OrderID]"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[OrderID]"
+                      name="OrderID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].ExternalColumns[OrderDate]"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[OrderDate]"
+                      name="OrderDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[ProductName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].ExternalColumns[ProductName]"
+                      length="40"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[ProductName]"
+                      name="ProductName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[UnitPrice]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].ExternalColumns[UnitPrice]"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[UnitPrice]"
+                      name="UnitPrice"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[Quantity]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].ExternalColumns[Quantity]"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[Quantity]"
+                      name="Quantity"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].ExternalColumns[CustomerID]"
+                      dataType="wstr"
+                      length="5"
+                      name="CustomerID" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].ExternalColumns[CompanyName]"
+                      dataType="wstr"
+                      length="40"
+                      name="CompanyName" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].ExternalColumns[OrderID]"
+                      dataType="i4"
+                      name="OrderID" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].ExternalColumns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      name="OrderDate" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].ExternalColumns[ProductName]"
+                      dataType="wstr"
+                      length="40"
+                      name="ProductName" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].ExternalColumns[UnitPrice]"
+                      dataType="cy"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].ExternalColumns[Quantity]"
+                      dataType="i2"
+                      name="Quantity" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de error de origen de ADO NET]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de error de origen de ADO NET].Columns[CustomerID]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de error de origen de ADO NET].Columns[CustomerID]"
+                      name="CustomerID" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de error de origen de ADO NET].Columns[CompanyName]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de error de origen de ADO NET].Columns[CompanyName]"
+                      name="CompanyName" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de error de origen de ADO NET].Columns[OrderID]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de error de origen de ADO NET].Columns[OrderID]"
+                      name="OrderID" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de error de origen de ADO NET].Columns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de error de origen de ADO NET].Columns[OrderDate]"
+                      name="OrderDate" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de error de origen de ADO NET].Columns[ProductName]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de error de origen de ADO NET].Columns[ProductName]"
+                      name="ProductName" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de error de origen de ADO NET].Columns[UnitPrice]"
+                      dataType="cy"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de error de origen de ADO NET].Columns[UnitPrice]"
+                      name="UnitPrice" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de error de origen de ADO NET].Columns[Quantity]"
+                      dataType="i2"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de error de origen de ADO NET].Columns[Quantity]"
+                      name="Quantity" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
+              description="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC."
+              name="VENTAS 1997 a mas"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."VENTAS_1997_ADELANTE"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.DEMO_VENTAS]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.DEMO_VENTAS]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET].Columns[CustomerID]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="CustomerID"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET].ExternalColumns[CustomerID]"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[CustomerID]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET].Columns[CompanyName]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="CompanyName"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET].ExternalColumns[CompanyName]"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[CompanyName]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET].Columns[OrderID]"
+                      cachedDataType="i4"
+                      cachedName="OrderID"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET].ExternalColumns[OrderID]"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[OrderID]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET].Columns[OrderDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="OrderDate"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET].ExternalColumns[OrderDate]"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[OrderDate]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET].Columns[ProductName]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="ProductName"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET].ExternalColumns[ProductName]"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[ProductName]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET].Columns[UnitPrice]"
+                      cachedDataType="cy"
+                      cachedName="UnitPrice"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET].ExternalColumns[UnitPrice]"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[UnitPrice]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET].Columns[Quantity]"
+                      cachedDataType="i2"
+                      cachedName="Quantity"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET].ExternalColumns[Quantity]"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[Quantity]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET].ExternalColumns[CustomerID]"
+                      dataType="wstr"
+                      length="5"
+                      name="CustomerID" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET].ExternalColumns[CompanyName]"
+                      dataType="wstr"
+                      length="40"
+                      name="CompanyName" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET].ExternalColumns[OrderID]"
+                      dataType="i4"
+                      name="OrderID" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET].ExternalColumns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      name="OrderDate" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET].ExternalColumns[ProductName]"
+                      dataType="wstr"
+                      length="40"
+                      name="ProductName" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET].ExternalColumns[UnitPrice]"
+                      dataType="numeric"
+                      name="UnitPrice"
+                      precision="19"
+                      scale="255" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET].ExternalColumns[Quantity]"
+                      dataType="i2"
+                      name="Quantity" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
+              description="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC."
+              name="VENTAS ANTES 1997"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."VENTAS_ANTES_1997"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.DEMO_VENTAS]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.DEMO_VENTAS]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET].Columns[CustomerID]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="CustomerID"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET].ExternalColumns[CustomerID]"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[CustomerID]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET].Columns[CompanyName]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="CompanyName"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET].ExternalColumns[CompanyName]"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[CompanyName]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET].Columns[OrderID]"
+                      cachedDataType="i4"
+                      cachedName="OrderID"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET].ExternalColumns[OrderID]"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[OrderID]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET].Columns[OrderDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="OrderDate"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET].ExternalColumns[OrderDate]"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[OrderDate]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET].Columns[ProductName]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="ProductName"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET].ExternalColumns[ProductName]"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[ProductName]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET].Columns[UnitPrice]"
+                      cachedDataType="cy"
+                      cachedName="UnitPrice"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET].ExternalColumns[UnitPrice]"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[UnitPrice]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET].Columns[Quantity]"
+                      cachedDataType="i2"
+                      cachedName="Quantity"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET].ExternalColumns[Quantity]"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET].Columns[Quantity]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET].ExternalColumns[CustomerID]"
+                      dataType="wstr"
+                      length="5"
+                      name="CustomerID" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET].ExternalColumns[CompanyName]"
+                      dataType="wstr"
+                      length="40"
+                      name="CompanyName" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET].ExternalColumns[OrderID]"
+                      dataType="i4"
+                      name="OrderID" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET].ExternalColumns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      name="OrderDate" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET].ExternalColumns[ProductName]"
+                      dataType="wstr"
+                      length="40"
+                      name="ProductName" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET].ExternalColumns[UnitPrice]"
+                      dataType="numeric"
+                      name="UnitPrice"
+                      precision="19"
+                      scale="255" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET].ExternalColumns[Quantity]"
+                      dataType="i2"
+                      name="Quantity" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Tarea Flujo de datos ventas 2.Paths[ANTES DE 1997]"
+              endId="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997.Inputs[Entrada de destino de ADO NET]"
+              name="ANTES DE 1997"
+              startId="Package\Tarea Flujo de datos ventas 2\División condicional.Outputs[ANTES DE 1997]" />
+            <path
+              refId="Package\Tarea Flujo de datos ventas 2.Paths[DESPUES DE 1997]"
+              endId="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas.Inputs[Entrada de destino de ADO NET]"
+              name="DESPUES DE 1997"
+              startId="Package\Tarea Flujo de datos ventas 2\División condicional.Outputs[DESPUES DE 1997]" />
+            <path
+              refId="Package\Tarea Flujo de datos ventas 2.Paths[Salida de origen de ADO NET]"
+              endId="Package\Tarea Flujo de datos ventas 2\División condicional.Inputs[Entrada de división condicional]"
+              name="Salida de origen de ADO NET"
+              startId="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND.Outputs[Salida de origen de ADO NET]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="sql12">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="219.2,41.6"
+          Id="Package\Tarea Flujo de datos ventas 2"
+          TopLeft="166.285717117543,94.2117660271668" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Tarea Flujo de datos ventas 2">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="184,41.6"
+          Id="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND"
+          TopLeft="157.142859818984,20.8000002917121" />
+        <NodeLayout
+          Size="174.4,41.6"
+          Id="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas"
+          TopLeft="63.4285725087536,212.894120632818" />
+        <NodeLayout
+          Size="179.2,41.6"
+          Id="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997"
+          TopLeft="342.400005381448,207.529414192781" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Tarea Flujo de datos ventas 2\División condicional"
+          TopLeft="168.342859546506,109.50588388872" />
+        <EdgeLayout
+          Id="Package\Tarea Flujo de datos ventas 2.Paths[Salida de origen de ADO NET]"
+          TopLeft="251.542859682745,62.4000002917121">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.1058835970077"
+              Start="0,0"
+              End="0,39.6058835970077">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.6058835970077" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Tarea Flujo de datos ventas 2.Paths[DESPUES DE 1997]"
+          TopLeft="253.942859546506,151.10588388872">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-103.314287037752,61.7882367440985"
+              Start="0,0"
+              End="-103.314287037752,54.2882367440985">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.8941183720493" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.8941183720493"
+                    Point2="0,30.8941183720493"
+                    Point3="-4,30.8941183720493" />
+                  <mssgle:LineSegment
+                    End="-99.314287037752,30.8941183720493" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-99.314287037752,30.8941183720493"
+                    Point2="-103.314287037752,30.8941183720493"
+                    Point3="-103.314287037752,34.8941183720493" />
+                  <mssgle:LineSegment
+                    End="-103.314287037752,54.2882367440985" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-92.957319300126,35.8941183720493,82.6003515625,9.568359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Tarea Flujo de datos ventas 2.Paths[ANTES DE 1997]"
+          TopLeft="281.142859546506,151.10588388872">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="150.857145834942,56.4235303040606"
+              Start="0,0"
+              End="150.857145834942,48.9235303040606">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.882876178869" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.882876178869"
+                    Point2="0,22.882876178869"
+                    Point3="4,22.882876178869" />
+                  <mssgle:LineSegment
+                    End="146.857145834942,22.882876178869" />
+                  <mssgle:CubicBezierSegment
+                    Point1="146.857145834942,22.882876178869"
+                    Point2="150.857145834942,22.882876178869"
+                    Point3="150.857145834942,26.882876178869" />
+                  <mssgle:LineSegment
+                    End="150.857145834942,48.9235303040606" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="39.4953307299712,27.882876178869,71.866484375,9.55859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tarea Flujo de datos ventas 2\Origen de NORTWIND">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tarea Flujo de datos ventas 2\VENTAS 1997 a mas">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tarea Flujo de datos ventas 2\VENTAS ANTES 1997">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

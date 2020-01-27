@@ -4,8 +4,6 @@
     <Configuration>
       <Name>Development</Name>
       <Options>
-        <ServerName>.</ServerName>
-        <PathOnServer>/SSISDB/VENTAS/PROY_VENTAS</PathOnServer>
         <Run64BitRuntime>true</Run64BitRuntime>
         <UserIDs />
         <UserPasswords />
@@ -15,7 +13,7 @@
           <ConfigurationSetting>
             <Id>LastModifiedTime</Id>
             <Name>LastModifiedTime</Name>
-            <Value xsi:type="xsd:dateTime">2020-01-27T21:31:46.9188147Z</Value>
+            <Value xsi:type="xsd:dateTime">2020-01-27T23:04:29.9488563Z</Value>
           </ConfigurationSetting>
         </ParameterConfigurationSensitiveValues>
       </Options>

@@ -21,6 +21,34 @@ Enviar correo si la tarea se ejecuta bien
 a egcc.uni@gmail.com
 
 
+TAREA
+-----------------------------------------------
+PAQUETE 1:
+Hacer un paquete SSIS de nombre PKG_VENTA_ALL 
+para que cargue todas las ventas por ciclo y curso de 
+la base de datos EDUTEC a la base de datos RESUMEN_EDUTEC.
+
+PAQUETE 2:
+Hacer un paquete SSIS de nombre PKG_VENTA_DIF
+para cargar todas las ventas de los ultimos 6 ciclos.
+Este paquete se debe programar en una tarea para que
+se ejecute todas las mañanas a las 6am y enviar correo 
+si se ejecuto correctamente o con error a egcc.uni@gmail.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
