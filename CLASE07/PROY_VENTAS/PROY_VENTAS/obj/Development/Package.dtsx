@@ -1,0 +1,519 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/27/2020 4:08:19 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="PC-402-01"
+  DTS:CreatorName="CEPS-01\Administrador"
+  DTS:DTSID="{85405490-386C-4AB2-B125-425E3FD78F11}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.4100.1"
+  DTS:LocaleID="10250"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{2286D91C-B3E8-4C3F-806A-2DF1D69F1E2D}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.DEMO_VENTAS]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{6DB26A82-0D45-4B27-99EE-055AC003B18B}"
+      DTS:ObjectName="LocalHost.DEMO_VENTAS">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;Initial Catalog=DEMO_VENTAS;Integrated Security=True;Application Name=SSIS-Package-{6DB26A82-0D45-4B27-99EE-055AC003B18B}LocalHost.DEMO_VENTAS;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.Northwind]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{5D480F9A-52D2-476E-B18B-D4396E08465E}"
+      DTS:ObjectName="LocalHost.Northwind">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;Initial Catalog=Northwind;Integrated Security=True;Application Name=SSIS-Package-{5D480F9A-52D2-476E-B18B-D4396E08465E}LocalHost.Northwind;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Tarea de Flujo de Ventas"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{E1F7173B-1A07-4283-8EA5-401EE8ED4AD1}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tarea de Flujo de Ventas"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Tarea de Flujo de Ventas\Destino Ventas"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
+              description="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC."
+              name="Destino Ventas"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."VENTAS"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tarea de Flujo de Ventas\Destino Ventas.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.DEMO_VENTAS]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.DEMO_VENTAS]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET].Columns[CustomerID]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="CustomerID"
+                      externalMetadataColumnId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[CustomerID]"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].Columns[CustomerID]" />
+                    <inputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET].Columns[CompanyName]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="CompanyName"
+                      externalMetadataColumnId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[CompanyName]"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].Columns[CompanyName]" />
+                    <inputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET].Columns[OrderID]"
+                      cachedDataType="i4"
+                      cachedName="OrderID"
+                      externalMetadataColumnId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[OrderID]"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].Columns[OrderID]" />
+                    <inputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET].Columns[OrderDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="OrderDate"
+                      externalMetadataColumnId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[OrderDate]"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].Columns[OrderDate]" />
+                    <inputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET].Columns[ProductName]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="ProductName"
+                      externalMetadataColumnId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[ProductName]"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].Columns[ProductName]" />
+                    <inputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET].Columns[UnitPrice]"
+                      cachedDataType="cy"
+                      cachedName="UnitPrice"
+                      externalMetadataColumnId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[UnitPrice]"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].Columns[UnitPrice]" />
+                    <inputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET].Columns[Quantity]"
+                      cachedDataType="i2"
+                      cachedName="Quantity"
+                      externalMetadataColumnId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[Quantity]"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].Columns[Quantity]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[CustomerID]"
+                      dataType="wstr"
+                      length="5"
+                      name="CustomerID" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[CompanyName]"
+                      dataType="wstr"
+                      length="40"
+                      name="CompanyName" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[OrderID]"
+                      dataType="i4"
+                      name="OrderID" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      name="OrderDate" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[ProductName]"
+                      dataType="wstr"
+                      length="40"
+                      name="ProductName" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[UnitPrice]"
+                      dataType="numeric"
+                      name="UnitPrice"
+                      precision="19"
+                      scale="255" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[Quantity]"
+                      dataType="i2"
+                      name="Quantity" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Tarea de Flujo de Ventas\Destino Ventas.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Destino Ventas.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tarea de Flujo de Ventas\Destino Ventas.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Destino Ventas.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tarea de Flujo de Ventas\Destino Ventas.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tarea de Flujo de Ventas\Origen Ventas"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server."
+              name="Origen Ventas"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica la instrucción SQL utilizada por el componente para extraer datos."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+	C.CustomerID, C.CompanyName, O.OrderID, O.OrderDate,
+	P.ProductName, D.UnitPrice, D.Quantity
+FROM Northwind.dbo.Customers AS C
+JOIN Northwind.dbo.Orders AS O ON C.CustomerID = O.CustomerID
+JOIN Northwind.dbo.[Order Details] AS D ON O.OrderID = D.OrderID
+JOIN Northwind.dbo.Products AS P ON D.ProductID = P.ProductID</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si se debe permitir que columnas externas que no sean de cadenas se conviertan implícitamente en cadenas en las columnas de salida."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de origen."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especificar el modo de recuperar información de columnas externas"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.Northwind]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.Northwind]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET]"
+                  name="Salida de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].Columns[CustomerID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].ExternalColumns[CustomerID]"
+                      length="5"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].Columns[CustomerID]"
+                      name="CustomerID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].Columns[CompanyName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].ExternalColumns[CompanyName]"
+                      length="40"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].Columns[CompanyName]"
+                      name="CompanyName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].Columns[OrderID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].ExternalColumns[OrderID]"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].Columns[OrderID]"
+                      name="OrderID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].Columns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].ExternalColumns[OrderDate]"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].Columns[OrderDate]"
+                      name="OrderDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].Columns[ProductName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].ExternalColumns[ProductName]"
+                      length="40"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].Columns[ProductName]"
+                      name="ProductName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].Columns[UnitPrice]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].ExternalColumns[UnitPrice]"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].Columns[UnitPrice]"
+                      name="UnitPrice"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].Columns[Quantity]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].ExternalColumns[Quantity]"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].Columns[Quantity]"
+                      name="Quantity"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].ExternalColumns[CustomerID]"
+                      dataType="wstr"
+                      length="5"
+                      name="CustomerID" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].ExternalColumns[CompanyName]"
+                      dataType="wstr"
+                      length="40"
+                      name="CompanyName" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].ExternalColumns[OrderID]"
+                      dataType="i4"
+                      name="OrderID" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].ExternalColumns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      name="OrderDate" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].ExternalColumns[ProductName]"
+                      dataType="wstr"
+                      length="40"
+                      name="ProductName" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].ExternalColumns[UnitPrice]"
+                      dataType="cy"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET].ExternalColumns[Quantity]"
+                      dataType="i2"
+                      name="Quantity" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de error de origen de ADO NET]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de error de origen de ADO NET].Columns[CustomerID]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de error de origen de ADO NET].Columns[CustomerID]"
+                      name="CustomerID" />
+                    <outputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de error de origen de ADO NET].Columns[CompanyName]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de error de origen de ADO NET].Columns[CompanyName]"
+                      name="CompanyName" />
+                    <outputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de error de origen de ADO NET].Columns[OrderID]"
+                      dataType="i4"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de error de origen de ADO NET].Columns[OrderID]"
+                      name="OrderID" />
+                    <outputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de error de origen de ADO NET].Columns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de error de origen de ADO NET].Columns[OrderDate]"
+                      name="OrderDate" />
+                    <outputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de error de origen de ADO NET].Columns[ProductName]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de error de origen de ADO NET].Columns[ProductName]"
+                      name="ProductName" />
+                    <outputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de error de origen de ADO NET].Columns[UnitPrice]"
+                      dataType="cy"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de error de origen de ADO NET].Columns[UnitPrice]"
+                      name="UnitPrice" />
+                    <outputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de error de origen de ADO NET].Columns[Quantity]"
+                      dataType="i2"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de error de origen de ADO NET].Columns[Quantity]"
+                      name="Quantity" />
+                    <outputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Tarea de Flujo de Ventas.Paths[Salida de origen de ADO NET]"
+              endId="Package\Tarea de Flujo de Ventas\Destino Ventas.Inputs[Entrada de destino de ADO NET]"
+              name="Salida de origen de ADO NET"
+              startId="Package\Tarea de Flujo de Ventas\Origen Ventas.Outputs[Salida de origen de ADO NET]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="sql12">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="196.8,41.6"
+          Id="Package\Tarea de Flujo de Ventas"
+          TopLeft="171.428574347983,97.2705895994774" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Tarea de Flujo de Ventas">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="145.6,41.6"
+          Id="Package\Tarea de Flujo de Ventas\Origen Ventas"
+          TopLeft="153.142859750865,16.5176472904773" />
+        <NodeLayout
+          Size="148.8,41.6"
+          Id="Package\Tarea de Flujo de Ventas\Destino Ventas"
+          TopLeft="156.000002656664,156.000002187841" />
+        <EdgeLayout
+          Id="Package\Tarea de Flujo de Ventas.Paths[Salida de origen de ADO NET]"
+          TopLeft="228.171431203764,58.1176472904773">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,97.8823548973638"
+              Start="0,0"
+              End="0,90.3823548973638">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,90.3823548973638" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tarea de Flujo de Ventas\Origen Ventas">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tarea de Flujo de Ventas\Destino Ventas">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

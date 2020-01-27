@@ -1,0 +1,23 @@
+CASO 01
+-----------------------------------------------
+Exportar la tabla EDUTEC.DBO.CURSO
+a la base de datoa DEMO.DBO.TBL_CURSO
+
+CASO 02
+-----------------------------------------------
+1.- Exportar la tabla EDUTEC.DBO.PROFESOR a 
+    un archivo de Excel de nombre PROFESORES.XLS
+2.- Importar el archivo PROFESOR.XLS a la 
+    base de datos DEMO.
+
+CASO 03
+-----------------------------------------------
+Exportar las ventas de la base de datos 
+NORTHWIND a la base de datos DEMO_VENTAS.
+Se debe programar una tarea para que se
+ejecute todos los días a las 6am.
+
+
+
+
+
