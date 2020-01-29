@@ -1,0 +1,8 @@
+URL: https://youtu.be/gaToC4eKrO4
+
+1.- Base de Datos del Servidor de Reportes (Por defecto: ReportServer)
+2.- Dirección Web del Servidor de Reportes (Por defecto: http://Servidor:80/ReportServer)
+3.- URL del Reporting Manager (Por defecto: http://egcc2019/Reports)
+
+Cadena de Conexión
+Data Source='localhost'; Initial Catalog=EDUTEC
