@@ -42,13 +42,13 @@
       <Options>
         <OutputPath>bin\Release</OutputPath>
         <TargetServerVersion>SSRS2008R2</TargetServerVersion>
-        <TargetServerURL>http://pc-402-01/</TargetServerURL>
-        <TargetFolder>http://pc-402-01/Reportes/Reportes</TargetFolder>
-        <TargetDataSourceFolder>http://pc-402-01/Reportes/Fuentes</TargetDataSourceFolder>
+        <TargetServerURL>http://pc-402-01/ReportServer</TargetServerURL>
+        <TargetFolder>Reportes</TargetFolder>
+        <TargetDataSourceFolder>Fuentes</TargetDataSourceFolder>
         <OverwriteDataSources>true</OverwriteDataSources>
-        <TargetDatasetFolder>http://pc-402-01/Reportes/Fuentes</TargetDatasetFolder>
+        <TargetDatasetFolder>Fuentes</TargetDatasetFolder>
         <OverwriteDatasets>true</OverwriteDatasets>
-        <TargetReportPartFolder>http://pc-402-01/Reportes/Reportes</TargetReportPartFolder>
+        <TargetReportPartFolder>Reportes</TargetReportPartFolder>
       </Options>
     </Configuration>
   </Configurations>
